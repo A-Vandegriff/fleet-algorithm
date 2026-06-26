@@ -6,8 +6,14 @@ public class Field{
     private boolean moist;
 
     public Field(){
+       
+    }
+    public void setAcres(int acres){
+        this.acres = acres;
 
-
+    }
+    public int getAcres(){
+        return acres;
     }
 
 
