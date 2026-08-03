@@ -7,12 +7,13 @@ import java.util.ArrayList;
 public class Farm {
 	private String name;
 	private Location location;
+	private Field field;
 	private ArrayList<Field> fields;
-	private boolean hasSand;
 
-	public Farm(String name, Location location) {
+	public Farm(String name, Location location, ArrayList<Field> fields) {
 		this.location = location;
 		this.name = name;
+		this.fields = fields;
 	}
 
 	public String getName() {
@@ -27,6 +28,11 @@ public class Farm {
 		System.out.println(name);
 		System.out.println(location.getLatitude());
 		System.out.println(location.getLongitude());
+		for(int i = 0; i < fields.size();i++){
+			System.out.println("Field acres: " + fields.get(i).getAcres());
+		}
 	}
+
+
 
 }

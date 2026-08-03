@@ -3,26 +3,19 @@ import classes.rig.Rig;
 import classes.route.Route;
 import classes.field.Field;
 import classes.location.Location;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
-/*
-STUFF NEEDED TO FULLY CALCULATE THE TIME OF A JOB
 
-taking the amount of acres to do between all the fields
-the gallons the trailer can hold, amount of trailers
-whether the farm is using a spreader or frac tank (consistent flow or not)
-how the route could impact the flow if multiple trucks
-
-*/
-//work on route, come up with real life situations and ideas that can predict a route 
-//even with stop signs and traffic, maybe use time of the day for busyness etc. 
-
+//create ArrayList that holds a farms fields, a farm will then be represented by a location, and field class
 public class Main {
-
+    static ArrayList<Field> fields = new ArrayList<Field>();
     public static void main(String[] args) {
 
         try (Scanner scanner = new Scanner(System.in)){
 
-            Field field = new Field();
             Rig rig = new Rig();
             Farm farm = createFarm(scanner);
             farm.display();
@@ -45,7 +38,24 @@ public class Main {
     public static Farm createFarm(Scanner scanner){
         System.out.println("Enter Farm name: ");
         String farmName = scanner.nextLine();
+
+        System.out.println("Enter number of fields: ");
+        int fieldNum = scanner.nextInt();
+        while(fieldNum > 15 || fieldNum <= 1){
+            System.out.print("Invalid amount, try again");
+            fieldNum = scanner.nextInt();
+        }
+        for(int i = 0; i < fieldNum; i++){
+            Field field = createField(scanner);
+            fields.add(field);
+        }
+        fields.sort(Comparator.comparingInt(Field::getAcres).reversed());
         Location location = createLocation(scanner);
-        return new Farm(farmName, location);
+        return new Farm(farmName, location, fields);
+    }
+    public static Field createField(Scanner scanner){
+        System.out.println("How many acres does the field have?");
+        int acres = scanner.nextInt();
+        return new Field(acres);
     }
 }
