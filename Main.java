@@ -1,17 +1,15 @@
 import classes.farm.Farm;
 import classes.rig.Rig;
-import classes.route.Route;
 import classes.field.Field;
 import classes.location.Location;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
 //create ArrayList that holds a farms fields, a farm will then be represented by a location, and field class
 public class Main {
-    static ArrayList<Field> fields = new ArrayList<Field>();
+    ArrayList<Field> fields = new ArrayList<Field>();
     public static void main(String[] args) {
 
         try (Scanner scanner = new Scanner(System.in)){
@@ -36,13 +34,14 @@ public class Main {
         return new Location(latitude, longitude);
     }
     public static Farm createFarm(Scanner scanner){
+        ArrayList<Field> fields = new ArrayList<Field>();
         System.out.println("Enter Farm name: ");
         String farmName = scanner.nextLine();
 
         System.out.println("Enter number of fields: ");
         int fieldNum = scanner.nextInt();
-        while(fieldNum > 15 || fieldNum <= 1){
-            System.out.print("Invalid amount, try again");
+        while(fieldNum > 15 || fieldNum < 1){
+            System.out.print("Invalid amount. Enter a number from 1 to 15: ");
             fieldNum = scanner.nextInt();
         }
         for(int i = 0; i < fieldNum; i++){

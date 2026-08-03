@@ -13,7 +13,7 @@ public class Farm {
 	public Farm(String name, Location location, ArrayList<Field> fields) {
 		this.location = location;
 		this.name = name;
-		this.fields = fields;
+		this.fields = new ArrayList<Field>(fields);
 	}
 
 	public String getName() {
